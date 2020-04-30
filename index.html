@@ -50,7 +50,7 @@
                            <button class="btn btn-default" id="add-case"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5 >$ <span id="case-price"> 0</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img src="images/remove.png" alt="" class="remove-item" id="remove-item">
                      </div>
                   </div>
                </div>
@@ -116,15 +116,17 @@
       
       function priceAdded(quantity,pprice,subPrice)
       {
-         const phoneQuantity = document.getElementById(quantity).value;
-         phoneQuantityNumber = parseFloat(phoneQuantity);
-         console.log(phoneQuantityNumber);
+         const Quantity = document.getElementById(quantity).value;
+         QuantityNumber = parseFloat(Quantity);
+         console.log(QuantityNumber);
 
          const price=document.getElementById(pprice).innerText;
          priceNumber=parseFloat(price);
+
+         
         
-         if(phoneQuantityNumber>=0){
-            const subTotal=phoneQuantity*priceNumber; 
+         if(QuantityNumber>=0){
+            const subTotal=Quantity*priceNumber; 
             document.getElementById(subPrice).innerText=subTotal;
             subtotalPrice("subtotal","phone-price","case-price") 
          }
@@ -181,11 +183,17 @@
 
       })
 
+      
+
       //checkout
-     /* const checkout= document.getElementById("checkOut");
+     const checkout= document.getElementById("checkOut");
       checkout.addEventListener("click",function(){
+         document.getElementById("checkOut").innerText="Thank you for shopping";
          subtotalPrice("subtotal","phone-price","case-price")
-      })*/
+      })
+
+
+      
    </script>
 </body>
 </html>
