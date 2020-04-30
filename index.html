@@ -46,9 +46,8 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button class="btn btn-default" id="remove-case"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" id="case-quantity" value="0">
+                           <input type="text" class="form-control text-center" id="case-quantity" value="0"  placeholder="1"> 
                            <button class="btn btn-default" id="add-case"><i class="fas fa-plus"></i></button>
-
                         </div>
                         <h5 >$ <span id="case-price"> 0</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
@@ -58,17 +57,16 @@
 
                <div class="cart-item">
                   <div class="row">
-
                      <div class="col-md-8">
                         <h5>Subtotal: </h5>
-                        <h5>Tax:</h5>
+                        <h5>Tax (10%):</h5>
                         <h5>Total:</h5>
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$ <span id="subtotal">0</span> </h5>
-                        <h5>$<span id="tax">0</span> </h5>
-                        <h5 >$ <span id="total">0</span>  </h5>
+                        <h5>$<span id="subtotal">0</span></h5>
+                        <h5>$<span id="tax">0</span></h5>
+                        <h5>$<span id="total">0</span></h5>
                      </div>
                   </div>
                </div>
@@ -86,8 +84,9 @@
       //quantity reduce function
       function reduceQuantity(id){
             
-            const Quantity = document.getElementById(id).value;
-            QuantityNumber = parseFloat(Quantity); 
+         const Quantity = document.getElementById(id).value;
+         QuantityNumber = parseFloat(Quantity); 
+         
          if(QuantityNumber>0) {
             const total= QuantityNumber-1;
             document.getElementById(id).value=total;
@@ -98,10 +97,12 @@
       }
 
       //quantity increase function
+
       function increaseQuantity(id){
             
-            const Quantity = document.getElementById(id).value;
-            QuantityNumber = parseFloat(Quantity); 
+         const Quantity = document.getElementById(id).value;
+         QuantityNumber = parseFloat(Quantity); 
+         
          if(QuantityNumber>0) {
             const total= QuantityNumber+1;
             document.getElementById(id).value=total;
@@ -112,6 +113,7 @@
       }
 
       // individual price update function
+      
       function priceAdded(quantity,pprice,subPrice)
       {
          const phoneQuantity = document.getElementById(quantity).value;
@@ -120,15 +122,16 @@
 
          const price=document.getElementById(pprice).innerText;
          priceNumber=parseFloat(price);
-         console.log(priceNumber);
+        
          if(phoneQuantityNumber>=0){
-            const subTotal=phoneQuantity*priceNumber;
-            
+            const subTotal=phoneQuantity*priceNumber; 
             document.getElementById(subPrice).innerText=subTotal;
+            subtotalPrice("subtotal","phone-price","case-price") 
          }
       }
 
       //checkout function
+
       function subtotalPrice(stotal,ptotal,ctotal){
          const subTotalAmount =document.getElementById(stotal).innerText;
          subTotalAmountNumber=parseFloat(subTotalAmount);
@@ -139,10 +142,14 @@
          const casePrice =document.getElementById(ctotal).innerText;
          casePriceNumber=parseFloat(casePrice);
 
+         // calculation part
+
          subTotalResult= phonePriceNumber+casePriceNumber;
-         console.log(subTotalResult);
          document.getElementById(stotal).innerText=subTotalResult;
-         document.getElementById("total").innerText=subTotalResult;
+         const tax =subTotalResult/10;
+         document.getElementById("tax").innerText=tax;
+         const Total = subTotalResult + tax;
+         document.getElementById("total").innerText=Total;
 
       }
 
@@ -157,6 +164,7 @@
       phoneAdded.addEventListener("click", function(){
          increaseQuantity("phone-quantity");
          priceAdded("phone-quantity","p-price","phone-price");
+        
       })
 
       //for phone case
@@ -174,10 +182,10 @@
       })
 
       //checkout
-      const checkout= document.getElementById("checkOut");
+     /* const checkout= document.getElementById("checkOut");
       checkout.addEventListener("click",function(){
          subtotalPrice("subtotal","phone-price","case-price")
-      })
+      })*/
    </script>
 </body>
 </html>
